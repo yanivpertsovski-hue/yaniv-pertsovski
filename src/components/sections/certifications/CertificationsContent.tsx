@@ -6,19 +6,22 @@ import { CertificationCard } from "@/components/shared/CertificationCard";
 import { certifications } from "@/content/data/certifications";
 import type { CertCategory } from "@/types";
 import { cn } from "@/lib/utils";
-
-const CATEGORIES: { label: string; value: "all" | CertCategory }[] = [
-  { label: "All", value: "all" },
-  { label: "Cybersecurity", value: "cybersecurity" },
-  { label: "Networking", value: "networking" },
-  { label: "Cloud", value: "cloud" },
-  { label: "Microsoft", value: "microsoft" },
-  { label: "Linux", value: "linux" },
-  { label: "DevOps", value: "devops" },
-];
+import { useTranslations } from "next-intl";
 
 export function CertificationsContent({ locale }: { locale: string }) {
+  const t = useTranslations("certifications");
+  const isHe = locale === "he";
   const [active, setActive] = useState<"all" | CertCategory>("all");
+
+  const CATEGORIES: { labelKey: string; value: "all" | CertCategory }[] = [
+    { labelKey: "all",           value: "all"          },
+    { labelKey: "cybersecurity", value: "cybersecurity" },
+    { labelKey: "networking",    value: "networking"    },
+    { labelKey: "cloud",         value: "cloud"         },
+    { labelKey: "microsoft",     value: "microsoft"     },
+    { labelKey: "linux",         value: "linux"         },
+    { labelKey: "devops",        value: "devops"        },
+  ];
 
   const filtered =
     active === "all"
@@ -33,21 +36,20 @@ export function CertificationsContent({ locale }: { locale: string }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
+          dir={isHe ? "rtl" : "ltr"}
         >
-          <p className="text-[var(--accent)] font-mono text-sm mb-4">
+          <p className="text-[var(--accent)] font-mono text-sm mb-4" dir="ltr">
             $ ls ./certifications/
           </p>
-          <h1 className="text-5xl font-bold tracking-tight mb-4">
-            <span className="gradient-text">Certifications</span>
+          <h1 className="text-5xl font-bold tracking-tight mb-4 gradient-text">
+            {t("title")}
           </h1>
-          <p className="text-[var(--muted)] text-lg">
-            {certifications.length} certifications across security, networking, and cloud.
-          </p>
+          <p className="text-[var(--muted)] text-lg">{t("subtitle")}</p>
         </motion.div>
 
         {/* Filter tabs */}
         <div
-          className="flex flex-wrap gap-2 mb-10"
+          className={cn("flex flex-wrap gap-2 mb-10", isHe && "justify-end")}
           role="tablist"
           aria-label="Filter certifications by category"
         >
@@ -64,7 +66,9 @@ export function CertificationsContent({ locale }: { locale: string }) {
                   : "bg-[var(--surface-2)] text-[var(--muted)] hover:text-[var(--foreground)] border border-[var(--border)]"
               )}
             >
-              {cat.label}
+              {cat.labelKey === "all"
+                ? t("all")
+                : t(`categories.${cat.labelKey}` as Parameters<typeof t>[0])}
             </button>
           ))}
         </div>
@@ -85,9 +89,7 @@ export function CertificationsContent({ locale }: { locale: string }) {
         </AnimatePresence>
 
         {filtered.length === 0 && (
-          <p className="text-center text-[var(--muted)] py-16">
-            No certifications in this category yet.
-          </p>
+          <p className="text-center text-[var(--muted)] py-16">{t("empty")}</p>
         )}
       </div>
     </div>

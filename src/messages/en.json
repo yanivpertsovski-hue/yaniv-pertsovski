@@ -82,6 +82,7 @@
     "issued": "Issued",
     "credential": "Credential ID",
     "all": "All",
+    "empty": "No certifications in this category yet.",
     "categories": {
       "cybersecurity": "Cybersecurity",
       "networking": "Networking",
@@ -161,14 +162,26 @@
   "resume": {
     "title": "Resume",
     "subtitle": "Full professional history",
-    "download": "Download PDF"
+    "download": "Download PDF",
+    "print": "Print",
+    "summary": "Summary",
+    "core_skills": "Core Skills"
   },
   "contact": {
     "title": "Contact",
     "subtitle": "Let's connect",
+    "description": "Whether you have a security challenge, infrastructure project, or just want to connect — reach out through any of the channels below.",
+    "response_time": "I typically respond within 24-48 hours.",
     "email": "Email",
+    "email_value": "Best for detailed inquiries",
     "linkedin": "LinkedIn",
-    "github": "GitHub"
+    "linkedin_value": "Connect professionally",
+    "linkedin_desc": "Professional networking",
+    "github": "GitHub",
+    "github_value": "Open source & projects",
+    "github_desc": "Code and contributions",
+    "location": "Location",
+    "location_value": "Available for remote work globally"
   },
   "common": {
     "view_all": "View All",

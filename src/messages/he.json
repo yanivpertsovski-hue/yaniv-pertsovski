@@ -82,6 +82,7 @@
     "issued": "הונפק",
     "credential": "מזהה אישור",
     "all": "הכל",
+    "empty": "אין הסמכות בקטגוריה זו עדיין.",
     "categories": {
       "cybersecurity": "אבטחת סייבר",
       "networking": "רשתות",
@@ -161,14 +162,26 @@
   "resume": {
     "title": "קורות חיים",
     "subtitle": "היסטוריה מקצועית מלאה",
-    "download": "הורד PDF"
+    "download": "הורד PDF",
+    "print": "הדפס",
+    "summary": "סיכום",
+    "core_skills": "כישורי ליבה"
   },
   "contact": {
     "title": "צור קשר",
     "subtitle": "בואו נתחבר",
+    "description": "בין אם יש לך אתגר אבטחה, פרויקט תשתיות או פשוט רוצה להתחבר — פנה אלי דרך אחד מהערוצים הבאים.",
+    "response_time": "אני בדרך כלל מגיב תוך 24-48 שעות.",
     "email": "אימייל",
+    "email_value": "הכי טוב לפניות מפורטות",
     "linkedin": "לינקדאין",
-    "github": "GitHub"
+    "linkedin_value": "התחבר באופן מקצועי",
+    "linkedin_desc": "רשת מקצועית",
+    "github": "GitHub",
+    "github_value": "קוד פתוח ופרויקטים",
+    "github_desc": "קוד ותרומות",
+    "location": "מיקום",
+    "location_value": "זמין לעבודה מרחוק גלובלית"
   },
   "common": {
     "view_all": "ראה הכל",

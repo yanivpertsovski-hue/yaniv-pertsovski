@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { Menu, X, Moon, Sun, Globe } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { cn } from "@/lib/utils";
+import { profile } from "@/content/data/profile";
 
 const NAV_LINKS = [
   { key: "about", href: "/about" },
@@ -77,7 +78,7 @@ export function Navbar({ locale }: NavbarProps) {
         >
           <span className="gradient-text font-bold">YP</span>
           <span className="text-[var(--muted)] ml-2 hidden sm:inline text-sm">
-            Yaniv Pertsovski
+            {locale === "he" ? profile.nameHe : profile.name}
           </span>
         </Link>
 
@@ -132,7 +133,7 @@ export function Navbar({ locale }: NavbarProps) {
             rel="noopener noreferrer"
             className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-sm font-medium transition-colors"
           >
-            Resume
+            {t("resume")}
           </a>
 
           {/* Mobile menu toggle */}
