@@ -22,10 +22,8 @@ const STATUS_COLORS: Record<string, string> = {
   planned: "text-[var(--accent)] bg-[var(--accent-muted)]",
 };
 
-export function ProjectCard({ project, locale, index = 0 }: ProjectCardProps) {
-  const href = locale === "he"
-    ? `/he/projects/${project.slug}`
-    : `/projects/${project.slug}`;
+export function ProjectCard({ project, locale: _locale, index = 0 }: ProjectCardProps) {
+  const href = `/projects/${project.slug}`;
 
   return (
     <motion.article

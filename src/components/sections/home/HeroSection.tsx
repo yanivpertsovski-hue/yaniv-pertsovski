@@ -8,18 +8,14 @@ import { GithubIcon } from "@/components/shared/GithubIcon";
 import { profile } from "@/content/data/profile";
 import { useTranslations } from "next-intl";
 
-export function HeroSection({ locale }: { locale: string }) {
+export function HeroSection() {
   const t = useTranslations("home.hero");
-  const isHe = locale === "he";
-  const lp = (href: string) => (isHe ? `/he${href}` : href);
-  const displayName = isHe ? profile.nameHe : profile.name;
 
   return (
     <section
       className="relative min-h-[100dvh] flex items-center overflow-hidden"
-      aria-label="Introduction"
+      aria-label="הקדמה"
     >
-      {/* Background */}
       <div className="hero-glow" aria-hidden />
       <div
         className="absolute inset-0 pointer-events-none"
@@ -40,28 +36,18 @@ export function HeroSection({ locale }: { locale: string }) {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-24">
-        {/*
-          Layout: in LTR (English) → text left, photo right.
-          In RTL (Hebrew)          → text right, photo left.
-          We keep the flex row order fixed and let dir handle mirroring.
-        */}
-        <div
-          className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-16 items-center"
-          dir={isHe ? "rtl" : "ltr"}
-        >
+        {/* RTL: text on right, photo on left */}
+        <div className="flex flex-col-reverse lg:flex-row-reverse gap-12 lg:gap-16 items-center" dir="rtl">
+
           {/* ── Text ── */}
           <motion.div
-            initial={{ opacity: 0, x: isHe ? 30 : -30 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="flex flex-col gap-6 flex-1"
           >
             {/* Available badge */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--success)]/10 border border-[var(--success)]/20 text-[var(--success)] text-xs font-medium">
                 <span className="w-2 h-2 rounded-full bg-[var(--success)] animate-pulse" />
                 {t("available")}
@@ -74,19 +60,12 @@ export function HeroSection({ locale }: { locale: string }) {
                 {t("greeting")}
               </p>
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-none">
-                {isHe ? (
-                  <span className="block gradient-text">{displayName}</span>
-                ) : (
-                  <>
-                    <span className="block text-[var(--foreground)]">{profile.name.split(" ")[0]}</span>
-                    <span className="block gradient-text">{profile.name.split(" ").slice(1).join(" ")}</span>
-                  </>
-                )}
+                <span className="block gradient-text">{profile.nameHe}</span>
               </h1>
             </div>
 
             {/* Headline */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-row-reverse">
               <div className="w-8 h-px bg-[var(--accent)] shrink-0" />
               <h2 className="text-lg sm:text-xl text-[var(--muted)] font-light">
                 {t("headline")}
@@ -101,9 +80,9 @@ export function HeroSection({ locale }: { locale: string }) {
             {/* Specializations */}
             <div className="flex flex-wrap gap-2">
               {[
-                { icon: Shield, key: "spec_security" },
-                { icon: Terminal, key: "spec_pentest" },
-                { icon: Server, key: "spec_infra" },
+                { icon: Shield,   key: "spec_security" },
+                { icon: Terminal, key: "spec_pentest"  },
+                { icon: Server,   key: "spec_infra"    },
               ].map(({ icon: Icon, key }) => (
                 <div
                   key={key}
@@ -127,7 +106,7 @@ export function HeroSection({ locale }: { locale: string }) {
                 {t("cta_cv")}
               </a>
               <Link
-                href={lp("/contact")}
+                href="/contact"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl glass border border-[var(--border)] font-medium text-sm transition-all hover:-translate-y-0.5 hover:border-[var(--accent)]/40"
               >
                 <Mail size={15} />
@@ -167,7 +146,6 @@ export function HeroSection({ locale }: { locale: string }) {
           >
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80">
               <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-[var(--accent)]/20 to-purple-500/10 blur-2xl" />
-
               <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-[var(--border)] shadow-2xl bg-[var(--surface-2)] flex items-center justify-center">
                 <div className="flex flex-col items-center gap-2 text-[var(--muted)]">
                   <span className="text-4xl font-bold gradient-text">YP</span>
@@ -175,26 +153,21 @@ export function HeroSection({ locale }: { locale: string }) {
                 </div>
               </div>
 
-              {/* Badge — bottom-start (left in LTR, right in RTL) */}
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-                className="absolute -bottom-2 -left-6 glass rounded-xl px-3 py-2 border border-[var(--border)] text-xs font-medium shadow-lg whitespace-nowrap"
-                dir="ltr"
+                className="absolute -bottom-2 -right-6 glass rounded-xl px-3 py-2 border border-[var(--border)] text-xs font-medium shadow-lg whitespace-nowrap"
               >
-                <span className="text-[var(--accent)]">★</span>{" "}
-                {t("badge_expert")}
+                <span className="text-[var(--accent)]">★</span>{" "}{t("badge_expert")}
               </motion.div>
 
-              {/* Badge — top-end (right in LTR, left in RTL) */}
               <motion.div
                 animate={{ y: [0, 6, 0] }}
                 transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 0.5 }}
-                className="absolute -top-2 -right-6 glass rounded-xl px-3 py-2 border border-[var(--border)] text-xs font-medium shadow-lg whitespace-nowrap"
+                className="absolute -top-2 -left-6 glass rounded-xl px-3 py-2 border border-[var(--border)] text-xs font-medium shadow-lg whitespace-nowrap"
                 dir="ltr"
               >
-                <span className="font-mono text-[var(--success)]">$</span>{" "}
-                {t("badge_years")}
+                <span className="font-mono text-[var(--success)]">$</span>{" "}7+ שנים
               </motion.div>
             </div>
           </motion.div>

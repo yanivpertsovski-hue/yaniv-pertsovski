@@ -7,21 +7,10 @@ import { SkillsPreview } from "@/components/sections/home/SkillsPreview";
 import { personSchema } from "@/lib/schemas";
 import type { Metadata } from "next";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  const isHe = locale === "he";
-
+export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: isHe
-      ? "יניב פרצובסקי | מהנדס אבטחת סייבר ותשתיות"
-      : "Yaniv Pertsovski | Cybersecurity & Infrastructure Engineer",
-    description: isHe
-      ? "מהנדס בכיר לאבטחת סייבר ותשתיות המתמחה בארכיטקטורת אבטחה ארגונית ובדיקות חדירה"
-      : "Senior Cybersecurity and Infrastructure Engineer specializing in enterprise security architecture, penetration testing, and critical infrastructure defense.",
+    title: "יניב פרצובסקי | מהנדס אבטחת סייבר ותשתיות",
+    description: "מהנדס בכיר לאבטחת סייבר ותשתיות המתמחה בארכיטקטורת אבטחה ארגונית ובדיקות חדירה",
   };
 }
 
@@ -38,7 +27,7 @@ export default async function HomePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema()) }}
       />
-      <HeroSection locale={locale} />
+      <HeroSection />
       <StatsSection />
       <FeaturedProjects locale={locale} />
       <FeaturedCerts locale={locale} />
