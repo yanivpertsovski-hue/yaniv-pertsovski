@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "home": "בית",
+    "about": "אודות",
+    "experience": "ניסיון",
+    "certifications": "הסמכות",
+    "projects": "פרויקטים",
+    "blog": "בלוג",
+    "research": "מחקר",
+    "skills": "כישורים",
+    "homelab": "מעבדה ביתית",
+    "resume": "קורות חיים",
+    "contact": "צור קשר"
+  },
+  "home": {
+    "hero": {
+      "greeting": "שלום, אני",
+      "cta_cv": "הורד קו\"ח",
+      "cta_contact": "צור קשר",
+      "cta_github": "GitHub",
+      "available": "פתוח להזדמנויות"
+    },
+    "sections": {
+      "latest_projects": "פרויקטים אחרונים",
+      "latest_articles": "מאמרים אחרונים",
+      "certifications": "הסמכות",
+      "skills": "כישורים טכניים",
+      "stats": "במספרים",
+      "timeline": "ציר זמן"
+    }
+  },
+  "about": {
+    "title": "אודות",
+    "subtitle": "הסיפור מאחורי המהנדס",
+    "mission": "משימה",
+    "values": "ערכים",
+    "focus": "פוקוס נוכחי",
+    "philosophy": "פילוסופיה מקצועית"
+  },
+  "experience": {
+    "title": "ניסיון",
+    "subtitle": "המסע המקצועי שלי",
+    "present": "הווה"
+  },
+  "certifications": {
+    "title": "הסמכות",
+    "subtitle": "מומחיות מוכחת באבטחה, רשתות וענן",
+    "verify": "אמת",
+    "expires": "תפוגה",
+    "issued": "הונפק",
+    "credential": "מזהה אישור",
+    "all": "הכל",
+    "categories": {
+      "cybersecurity": "אבטחת סייבר",
+      "networking": "רשתות",
+      "cloud": "ענן",
+      "microsoft": "מיקרוסופט",
+      "linux": "לינוקס",
+      "devops": "DevOps",
+      "other": "אחר"
+    }
+  },
+  "projects": {
+    "title": "פרויקטים",
+    "subtitle": "מה בניתי וחקרתי",
+    "view_project": "צפה בפרויקט",
+    "view_github": "GitHub",
+    "view_demo": "הדגמה חיה",
+    "status": {
+      "active": "פעיל",
+      "completed": "הושלם",
+      "archived": "בארכיון",
+      "in-progress": "בתהליך",
+      "planned": "מתוכנן"
+    }
+  },
+  "blog": {
+    "title": "בלוג",
+    "subtitle": "מאמרים טכניים ותובנות",
+    "read_more": "קרא עוד",
+    "reading_time": "דקות קריאה",
+    "search": "חפש מאמרים..."
+  },
+  "research": {
+    "title": "מחקר",
+    "subtitle": "מחקר אבטחה, write-ups וניסויי מעבדה",
+    "types": {
+      "writeup": "Write-Up",
+      "vuln-analysis": "ניתוח פגיעות",
+      "lab": "מעבדה",
+      "experiment": "ניסוי",
+      "note": "הערה טכנית"
+    }
+  },
+  "skills": {
+    "title": "כישורים",
+    "subtitle": "טכנולוגיות וכלים שאני עובד איתם",
+    "levels": {
+      "beginner": "מתחיל",
+      "intermediate": "בינוני",
+      "advanced": "מתקדם",
+      "expert": "מומחה"
+    }
+  },
+  "homelab": {
+    "title": "מעבדה ביתית",
+    "subtitle": "מעבדת המחקר האישית שלי",
+    "devices": "מכשירים",
+    "services": "שירותים פעילים",
+    "network": "דיאגרמת רשת"
+  },
+  "resume": {
+    "title": "קורות חיים",
+    "subtitle": "היסטוריה מקצועית מלאה",
+    "download": "הורד PDF"
+  },
+  "contact": {
+    "title": "צור קשר",
+    "subtitle": "בואו נתחבר",
+    "email": "אימייל",
+    "linkedin": "לינקדאין",
+    "github": "GitHub"
+  },
+  "common": {
+    "view_all": "ראה הכל",
+    "back": "חזור",
+    "technologies": "טכנולוגיות",
+    "tags": "תגיות",
+    "date": "תאריך",
+    "loading": "טוען...",
+    "theme_dark": "מצב כהה",
+    "theme_light": "מצב בהיר",
+    "language": "שפה"
+  }
+}

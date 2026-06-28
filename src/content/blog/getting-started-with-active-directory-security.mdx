@@ -1,0 +1,60 @@
+---
+title: "Getting Started with Active Directory Security"
+description: "An introduction to Active Directory hardening fundamentals — covering attack vectors, defensive controls, and monitoring strategies."
+date: "2024-04-01"
+tags: ["active-directory", "windows", "hardening", "security"]
+category: "cybersecurity"
+featured: true
+draft: false
+---
+
+# Getting Started with Active Directory Security
+
+> **Note:** This is a placeholder blog post. Replace this with your real article.
+
+Active Directory (AD) remains one of the most targeted systems in enterprise environments.
+Understanding how attackers move through AD — and how defenders can detect and stop them —
+is a foundational skill for any security professional.
+
+## Why Active Directory Is a High-Value Target
+
+AD controls authentication and authorization for virtually every resource in a Windows environment.
+Compromise of AD means compromise of the entire organization.
+
+## Common Attack Vectors
+
+### 1. Kerberoasting
+
+Attackers request Kerberos service tickets for service accounts and crack them offline.
+
+```powershell
+# Detection: Monitor for event ID 4769 with ticket encryption type 0x17
+Get-WinEvent -FilterHashtable @{
+  LogName = 'Security'
+  Id = 4769
+} | Where-Object { $_.Properties[5].Value -eq '0x17' }
+```
+
+### 2. AS-REP Roasting
+
+Accounts with "Do not require Kerberos preauthentication" enabled are vulnerable.
+
+### 3. Pass-the-Hash
+
+Stolen NTLM hashes can be used to authenticate without knowing the plaintext password.
+
+## Defensive Controls
+
+- Enforce tiered administration model
+- Enable Protected Users security group
+- Deploy Credential Guard
+- Monitor privileged group membership changes
+- Implement fine-grained password policies
+
+## Monitoring
+
+TODO: Add your real monitoring recommendations and SIEM queries.
+
+---
+
+*TODO: This is a placeholder post. Write your real article here.*

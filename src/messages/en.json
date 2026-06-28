@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "experience": "Experience",
+    "certifications": "Certifications",
+    "projects": "Projects",
+    "blog": "Blog",
+    "research": "Research",
+    "skills": "Skills",
+    "homelab": "Home Lab",
+    "resume": "Resume",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "greeting": "Hello, I'm",
+      "cta_cv": "Download CV",
+      "cta_contact": "Get in Touch",
+      "cta_github": "GitHub",
+      "available": "Open to opportunities"
+    },
+    "sections": {
+      "latest_projects": "Latest Projects",
+      "latest_articles": "Latest Articles",
+      "certifications": "Certifications",
+      "skills": "Technical Skills",
+      "stats": "By the Numbers",
+      "timeline": "Career Timeline"
+    }
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "The story behind the engineer",
+    "mission": "Mission",
+    "values": "Values",
+    "focus": "Current Focus",
+    "philosophy": "Professional Philosophy"
+  },
+  "experience": {
+    "title": "Experience",
+    "subtitle": "My professional journey",
+    "present": "Present"
+  },
+  "certifications": {
+    "title": "Certifications",
+    "subtitle": "Validated expertise across security, networking, and cloud",
+    "verify": "Verify",
+    "expires": "Expires",
+    "issued": "Issued",
+    "credential": "Credential ID",
+    "all": "All",
+    "categories": {
+      "cybersecurity": "Cybersecurity",
+      "networking": "Networking",
+      "cloud": "Cloud",
+      "microsoft": "Microsoft",
+      "linux": "Linux",
+      "devops": "DevOps",
+      "other": "Other"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "What I've built and researched",
+    "view_project": "View Project",
+    "view_github": "GitHub",
+    "view_demo": "Live Demo",
+    "status": {
+      "active": "Active",
+      "completed": "Completed",
+      "archived": "Archived",
+      "in-progress": "In Progress",
+      "planned": "Planned"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Technical articles and insights",
+    "read_more": "Read More",
+    "reading_time": "min read",
+    "search": "Search articles..."
+  },
+  "research": {
+    "title": "Research",
+    "subtitle": "Security research, write-ups, and lab experiments",
+    "types": {
+      "writeup": "Write-Up",
+      "vuln-analysis": "Vulnerability Analysis",
+      "lab": "Lab",
+      "experiment": "Experiment",
+      "note": "Technical Note"
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "subtitle": "Technologies and tools I work with",
+    "levels": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "expert": "Expert"
+    }
+  },
+  "homelab": {
+    "title": "Home Lab",
+    "subtitle": "My personal security research lab",
+    "devices": "Devices",
+    "services": "Running Services",
+    "network": "Network Diagram"
+  },
+  "resume": {
+    "title": "Resume",
+    "subtitle": "Full professional history",
+    "download": "Download PDF"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Let's connect",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  },
+  "common": {
+    "view_all": "View All",
+    "back": "Back",
+    "technologies": "Technologies",
+    "tags": "Tags",
+    "date": "Date",
+    "loading": "Loading...",
+    "theme_dark": "Dark Mode",
+    "theme_light": "Light Mode",
+    "language": "Language"
+  }
+}
