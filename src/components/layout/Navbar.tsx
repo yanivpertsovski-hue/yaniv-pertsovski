@@ -46,14 +46,15 @@ export function Navbar({ locale }: NavbarProps) {
   const localePath = (href: string) =>
     locale === "he" ? `/he${href}` : href;
 
-  const toggleLocale = () => {
-    const current = pathname;
+  // Build the href for the alternate locale
+  const altLocaleHref = (() => {
     if (locale === "en") {
-      window.location.href = "/he" + (current === "/" ? "" : current);
-    } else {
-      window.location.href = current.replace(/^\/he/, "") || "/";
+      return "/he" + (pathname === "/" ? "" : pathname);
     }
-  };
+    // locale === "he": strip the /he prefix
+    const stripped = pathname.replace(/^\/he(\/|$)/, "/");
+    return stripped === "/" ? "/" : stripped;
+  })();
 
   return (
     <motion.header
@@ -104,16 +105,13 @@ export function Navbar({ locale }: NavbarProps) {
         {/* Controls */}
         <div className="flex items-center gap-2">
           {/* Language toggle */}
-          <button
-            onClick={toggleLocale}
-            aria-label="Toggle language"
-            className="p-2 rounded-md text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-2)] transition-colors"
+          <a
+            href={altLocaleHref}
+            aria-label={locale === "en" ? "Switch to Hebrew" : "Switch to English"}
+            className="p-2 rounded-md text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-2)] transition-colors inline-flex items-center justify-center"
           >
             <Globe size={16} />
-            <span className="sr-only">
-              {locale === "en" ? "Switch to Hebrew" : "Switch to English"}
-            </span>
-          </button>
+          </a>
 
           {/* Theme toggle */}
           <button
