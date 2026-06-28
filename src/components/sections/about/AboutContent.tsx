@@ -6,36 +6,20 @@ import { SectionHeader } from "@/components/shared/SectionHeader";
 import { profile } from "@/content/data/profile";
 import { stats } from "@/content/data/stats";
 import { AnimatedCounter } from "@/components/shared/AnimatedCounter";
-
-const VALUES = [
-  {
-    icon: Target,
-    title: "Precision",
-    description:
-      "Security is about details. One misconfiguration can be catastrophic. I approach every system with exactness and thoroughness.",
-  },
-  {
-    icon: BookOpen,
-    title: "Continuous Learning",
-    description:
-      "The threat landscape evolves daily. I invest heavily in staying current with new attack techniques, defenses, and technologies.",
-  },
-  {
-    icon: Heart,
-    title: "Ownership",
-    description:
-      "I treat the systems I protect as my own. That mindset drives decisions that prioritize long-term security over shortcuts.",
-  },
-  {
-    icon: Compass,
-    title: "Transparency",
-    description:
-      "Security findings, risks, and recommendations should be communicated clearly to all stakeholders — technical and non-technical.",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export function AboutContent({ locale }: { locale: string }) {
+  const t = useTranslations("about");
+  const ts = useTranslations("stats");
   const bio = locale === "he" ? profile.bioHe : profile.bio;
+  const isHe = locale === "he";
+
+  const VALUES = [
+    { icon: Target,    titleKey: "precision", descKey: "precision_desc" },
+    { icon: BookOpen,  titleKey: "learning",  descKey: "learning_desc"  },
+    { icon: Heart,     titleKey: "ownership", descKey: "ownership_desc" },
+    { icon: Compass,   titleKey: "transparency", descKey: "transparency_desc" },
+  ] as const;
 
   return (
     <div className="min-h-dvh">
@@ -47,16 +31,20 @@ export function AboutContent({ locale }: { locale: string }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            dir={isHe ? "rtl" : "ltr"}
           >
-            <p className="text-[var(--accent)] font-mono text-sm mb-4">
+            <p className="text-[var(--accent)] font-mono text-sm mb-4" dir="ltr">
               $ whoami
             </p>
             <h1 className="text-5xl sm:text-6xl font-bold tracking-tight mb-6">
-              About{" "}
-              <span className="gradient-text">Me</span>
+              {isHe ? (
+                <span className="gradient-text">{t("title")}</span>
+              ) : (
+                <>About{" "}<span className="gradient-text">Me</span></>
+              )}
             </h1>
             <p className="text-[var(--muted)] text-xl max-w-2xl leading-relaxed">
-              {profile.subheadline}
+              {t("subtitle")}
             </p>
           </motion.div>
         </div>
@@ -73,7 +61,6 @@ export function AboutContent({ locale }: { locale: string }) {
               viewport={{ once: true }}
               className="flex flex-col gap-6"
             >
-              {/* Photo placeholder */}
               <div className="aspect-square w-full max-w-xs mx-auto lg:mx-0 rounded-2xl bg-[var(--surface-2)] border border-[var(--border)] flex items-center justify-center">
                 <div className="flex flex-col items-center gap-2 text-[var(--muted)]">
                   <span className="text-5xl font-bold gradient-text">YP</span>
@@ -81,13 +68,12 @@ export function AboutContent({ locale }: { locale: string }) {
                 </div>
               </div>
 
-              {/* Quick info */}
               <div className="glass rounded-2xl p-5 flex flex-col gap-3">
-                <div className="flex items-center gap-2 text-sm">
+                <div className="flex items-center gap-2 text-sm" dir={isHe ? "rtl" : "ltr"}>
                   <MapPin size={14} className="text-[var(--accent)]" />
                   <span className="text-[var(--muted)]">{profile.location}</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm">
+                <div className="flex items-center gap-2 text-sm" dir="ltr">
                   <Mail size={14} className="text-[var(--accent)]" />
                   <a
                     href={`mailto:${profile.social.email}`}
@@ -99,11 +85,13 @@ export function AboutContent({ locale }: { locale: string }) {
 
                 <div className="border-t border-[var(--border)] pt-3 mt-1 grid grid-cols-2 gap-4">
                   {stats.map((s) => (
-                    <div key={s.label} className="text-center">
+                    <div key={s.labelKey} className="text-center">
                       <div className="text-xl font-bold gradient-text">
                         <AnimatedCounter value={s.value} suffix={s.suffix} />
                       </div>
-                      <p className="text-xs text-[var(--muted)] mt-0.5">{s.label}</p>
+                      <p className="text-xs text-[var(--muted)] mt-0.5">
+                        {ts(s.labelKey as "years" | "certifications" | "projects" | "assessments")}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -116,9 +104,10 @@ export function AboutContent({ locale }: { locale: string }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="lg:col-span-2 flex flex-col gap-8"
+              dir={isHe ? "rtl" : "ltr"}
             >
               <div>
-                <h2 className="text-2xl font-bold mb-4">Professional Biography</h2>
+                <h2 className="text-2xl font-bold mb-4">{t("biography")}</h2>
                 <div className="prose text-[var(--muted)] whitespace-pre-line leading-relaxed">
                   {bio}
                 </div>
@@ -128,23 +117,18 @@ export function AboutContent({ locale }: { locale: string }) {
               <div className="glass rounded-2xl p-6 border-l-4 border-[var(--accent)]">
                 <h3 className="font-semibold mb-2 flex items-center gap-2">
                   <Target size={16} className="text-[var(--accent)]" />
-                  Mission
+                  {t("mission")}
                 </h3>
                 <p className="text-[var(--muted)] text-sm leading-relaxed">
-                  TODO: Write your professional mission statement here. What drives your work?
-                  What impact do you want to have in cybersecurity?
+                  {t("mission_placeholder")}
                 </p>
               </div>
 
               {/* Current Focus */}
               <div>
-                <h3 className="font-semibold mb-3">Current Focus</h3>
+                <h3 className="font-semibold mb-3">{t("focus")}</h3>
                 <ul className="flex flex-col gap-2">
-                  {[
-                    "TODO: Current focus area 1 (e.g. Red Team operations)",
-                    "TODO: Current focus area 2 (e.g. Cloud security architecture)",
-                    "TODO: Current certification pursuit",
-                  ].map((item, i) => (
+                  {(t.raw("focus_items") as string[]).map((item, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm text-[var(--muted)]">
                       <span className="text-[var(--accent)] mt-1 shrink-0">▸</span>
                       {item}
@@ -160,23 +144,26 @@ export function AboutContent({ locale }: { locale: string }) {
       {/* Values */}
       <section className="py-24 bg-[var(--surface)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeader title="Values" subtitle="What guides my work" />
+          <SectionHeader title={t("values")} subtitle={t("values_subtitle")} />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {VALUES.map((v, i) => (
               <motion.div
-                key={v.title}
+                key={v.titleKey}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 className="glass rounded-2xl p-6 flex flex-col gap-3"
+                dir={isHe ? "rtl" : "ltr"}
               >
                 <div className="w-10 h-10 rounded-xl bg-[var(--accent-muted)] flex items-center justify-center">
                   <v.icon size={18} className="text-[var(--accent)]" />
                 </div>
-                <h3 className="font-semibold">{v.title}</h3>
+                <h3 className="font-semibold">
+                  {t(`values_list.${v.titleKey}` as Parameters<typeof t>[0])}
+                </h3>
                 <p className="text-sm text-[var(--muted)] leading-relaxed">
-                  {v.description}
+                  {t(`values_list.${v.descKey}` as Parameters<typeof t>[0])}
                 </p>
               </motion.div>
             ))}
@@ -187,18 +174,15 @@ export function AboutContent({ locale }: { locale: string }) {
       {/* Philosophy */}
       <section className="py-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <SectionHeader
-            title="Professional Philosophy"
-            align="center"
-          />
+          <SectionHeader title={t("philosophy")} align="center" />
           <motion.blockquote
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-xl sm:text-2xl text-[var(--muted)] leading-relaxed italic font-light"
+            dir={isHe ? "rtl" : "ltr"}
           >
-            "TODO: Add your professional philosophy or a quote that defines your
-            approach to security and engineering."
+            {t("philosophy_placeholder")}
           </motion.blockquote>
         </div>
       </section>

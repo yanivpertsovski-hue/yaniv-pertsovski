@@ -201,7 +201,7 @@ export interface HomeLab {
 // ── Stats ─────────────────────────────────────────────────────────────────────
 
 export interface Stat {
-  label: string;
+  labelKey: string; // key in messages.stats.*
   value: number;
   suffix?: string;
   prefix?: string;

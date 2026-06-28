@@ -10,7 +10,9 @@ import { useTranslations } from "next-intl";
 
 export function HeroSection({ locale }: { locale: string }) {
   const t = useTranslations("home.hero");
-  const lp = (href: string) => (locale === "he" ? `/he${href}` : href);
+  const isHe = locale === "he";
+  const lp = (href: string) => (isHe ? `/he${href}` : href);
+  const displayName = isHe ? profile.nameHe : profile.name;
 
   return (
     <section
@@ -27,7 +29,6 @@ export function HeroSection({ locale }: { locale: string }) {
         }}
         aria-hidden
       />
-      {/* Grid */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.015]"
         style={{
@@ -39,18 +40,28 @@ export function HeroSection({ locale }: { locale: string }) {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-24">
-        {/* Always LTR layout — photo right, text left */}
-        <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-16 items-center" dir="ltr">
-
+        {/*
+          Layout: in LTR (English) → text left, photo right.
+          In RTL (Hebrew)          → text right, photo left.
+          We keep the flex row order fixed and let dir handle mirroring.
+        */}
+        <div
+          className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-16 items-center"
+          dir={isHe ? "rtl" : "ltr"}
+        >
           {/* ── Text ── */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: isHe ? 30 : -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="flex flex-col gap-6 flex-1 text-left"
+            className="flex flex-col gap-6 flex-1"
           >
             {/* Available badge */}
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--success)]/10 border border-[var(--success)]/20 text-[var(--success)] text-xs font-medium">
                 <span className="w-2 h-2 rounded-full bg-[var(--success)] animate-pulse" />
                 {t("available")}
@@ -63,35 +74,43 @@ export function HeroSection({ locale }: { locale: string }) {
                 {t("greeting")}
               </p>
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-none">
-                <span className="block text-[var(--foreground)]">{profile.name.split(" ")[0]}</span>
-                <span className="block gradient-text">{profile.name.split(" ").slice(1).join(" ")}</span>
+                {isHe ? (
+                  <span className="block gradient-text">{displayName}</span>
+                ) : (
+                  <>
+                    <span className="block text-[var(--foreground)]">{profile.name.split(" ")[0]}</span>
+                    <span className="block gradient-text">{profile.name.split(" ").slice(1).join(" ")}</span>
+                  </>
+                )}
               </h1>
             </div>
 
             {/* Headline */}
             <div className="flex items-center gap-3">
               <div className="w-8 h-px bg-[var(--accent)] shrink-0" />
-              <h2 className="text-lg sm:text-xl text-[var(--muted)] font-light">{profile.headline}</h2>
+              <h2 className="text-lg sm:text-xl text-[var(--muted)] font-light">
+                {t("headline")}
+              </h2>
             </div>
 
             {/* Description */}
             <p className="text-[var(--muted)] text-sm sm:text-base leading-relaxed max-w-xl">
-              {profile.subheadline}
+              {t("subheadline")}
             </p>
 
             {/* Specializations */}
             <div className="flex flex-wrap gap-2">
               {[
-                { icon: Shield, label: "Security Architecture" },
-                { icon: Terminal, label: "Penetration Testing" },
-                { icon: Server, label: "Infrastructure" },
-              ].map(({ icon: Icon, label }) => (
+                { icon: Shield, key: "spec_security" },
+                { icon: Terminal, key: "spec_pentest" },
+                { icon: Server, key: "spec_infra" },
+              ].map(({ icon: Icon, key }) => (
                 <div
-                  key={label}
+                  key={key}
                   className="flex items-center gap-1.5 text-xs text-[var(--muted)] bg-[var(--surface-2)] border border-[var(--border)] px-3 py-1.5 rounded-lg"
                 >
                   <Icon size={12} className="text-[var(--accent)]" />
-                  {label}
+                  {t(key as "spec_security" | "spec_pentest" | "spec_infra")}
                 </div>
               ))}
             </div>
@@ -147,10 +166,8 @@ export function HeroSection({ locale }: { locale: string }) {
             className="flex justify-center shrink-0"
           >
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80">
-              {/* Glow ring */}
               <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-[var(--accent)]/20 to-purple-500/10 blur-2xl" />
 
-              {/* Photo */}
               <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-[var(--border)] shadow-2xl bg-[var(--surface-2)] flex items-center justify-center">
                 <div className="flex flex-col items-center gap-2 text-[var(--muted)]">
                   <span className="text-4xl font-bold gradient-text">YP</span>
@@ -158,23 +175,26 @@ export function HeroSection({ locale }: { locale: string }) {
                 </div>
               </div>
 
-              {/* Badge — bottom left */}
+              {/* Badge — bottom-start (left in LTR, right in RTL) */}
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
                 className="absolute -bottom-2 -left-6 glass rounded-xl px-3 py-2 border border-[var(--border)] text-xs font-medium shadow-lg whitespace-nowrap"
+                dir="ltr"
               >
-                <span className="text-[var(--accent)]">★</span> Security Expert
+                <span className="text-[var(--accent)]">★</span>{" "}
+                {t("badge_expert")}
               </motion.div>
 
-              {/* Badge — top right */}
+              {/* Badge — top-end (right in LTR, left in RTL) */}
               <motion.div
                 animate={{ y: [0, 6, 0] }}
                 transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 0.5 }}
                 className="absolute -top-2 -right-6 glass rounded-xl px-3 py-2 border border-[var(--border)] text-xs font-medium shadow-lg whitespace-nowrap"
                 dir="ltr"
               >
-                <span className="font-mono text-[var(--success)]">$</span> 7+ Years
+                <span className="font-mono text-[var(--success)]">$</span>{" "}
+                {t("badge_years")}
               </motion.div>
             </div>
           </motion.div>

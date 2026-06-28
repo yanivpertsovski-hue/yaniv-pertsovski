@@ -6,8 +6,12 @@ import { skillGroups } from "@/content/data/skills";
 import { SkillBar } from "@/components/shared/SkillBar";
 import { cn } from "@/lib/utils";
 import type { SkillCategory } from "@/types";
+import { useTranslations } from "next-intl";
 
 export function SkillsContent({ locale }: { locale: string }) {
+  const t = useTranslations("skills");
+  const tc = useTranslations("skills.categories");
+  const isHe = locale === "he";
   const [active, setActive] = useState<SkillCategory | "all">("all");
 
   const filtered =
@@ -22,20 +26,23 @@ export function SkillsContent({ locale }: { locale: string }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
+          dir={isHe ? "rtl" : "ltr"}
         >
-          <p className="text-[var(--accent)] font-mono text-sm mb-4">
+          <p className="text-[var(--accent)] font-mono text-sm mb-4" dir="ltr">
             $ cat skills.json | jq .
           </p>
           <h1 className="text-5xl font-bold tracking-tight mb-4">
-            Technical <span className="gradient-text">Skills</span>
+            {isHe ? (
+              <span className="gradient-text">{t("title")}</span>
+            ) : (
+              <>Technical <span className="gradient-text">Skills</span></>
+            )}
           </h1>
-          <p className="text-[var(--muted)] text-lg">
-            Technologies and tools I use to design, build, and secure systems.
-          </p>
+          <p className="text-[var(--muted)] text-lg">{t("subtitle")}</p>
         </motion.div>
 
         {/* Filter */}
-        <div className="flex flex-wrap gap-2 mb-10">
+        <div className={cn("flex flex-wrap gap-2 mb-10", isHe && "justify-end")}>
           <button
             onClick={() => setActive("all")}
             className={cn(
@@ -45,7 +52,7 @@ export function SkillsContent({ locale }: { locale: string }) {
                 : "bg-[var(--surface-2)] text-[var(--muted)] hover:text-[var(--foreground)] border border-[var(--border)]"
             )}
           >
-            All
+            {t("all")}
           </button>
           {skillGroups.map((g) => (
             <button
@@ -58,7 +65,7 @@ export function SkillsContent({ locale }: { locale: string }) {
                   : "bg-[var(--surface-2)] text-[var(--muted)] hover:text-[var(--foreground)] border border-[var(--border)]"
               )}
             >
-              {g.label}
+              {tc(g.category as Parameters<typeof tc>[0])}
             </button>
           ))}
         </div>
@@ -73,13 +80,16 @@ export function SkillsContent({ locale }: { locale: string }) {
               viewport={{ once: true }}
               transition={{ delay: gi * 0.08 }}
               className="glass rounded-2xl p-6 flex flex-col gap-5"
+              dir={isHe ? "rtl" : "ltr"}
             >
               <h2 className="font-bold text-lg border-b border-[var(--border)] pb-3">
-                <span className="gradient-text">{group.label}</span>
+                <span className="gradient-text">
+                  {tc(group.category as Parameters<typeof tc>[0])}
+                </span>
               </h2>
               <div className="flex flex-col gap-4">
                 {group.skills.map((skill, si) => (
-                  <SkillBar key={skill.id} skill={skill} index={si} />
+                  <SkillBar key={skill.id} skill={skill} index={si} locale={locale} />
                 ))}
               </div>
             </motion.div>

@@ -3,8 +3,10 @@ import { ArrowRight } from "lucide-react";
 import { BlogCard } from "@/components/shared/BlogCard";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { getAllPosts } from "@/lib/mdx";
+import { getTranslations } from "next-intl/server";
 
-export function LatestPosts({ locale }: { locale: string }) {
+export async function LatestPosts({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: "home.sections" });
   const posts = getAllPosts().slice(0, 3);
   const lp = (href: string) => (locale === "he" ? `/he${href}` : href);
 
@@ -15,15 +17,15 @@ export function LatestPosts({ locale }: { locale: string }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between mb-12">
           <SectionHeader
-            title="Latest Articles"
-            subtitle="Thoughts on security and infrastructure"
+            title={t("latest_articles")}
+            subtitle={t("latest_articles_sub")}
             className="mb-0"
           />
           <Link
             href={lp("/blog")}
             className="hidden sm:flex items-center gap-1.5 text-sm text-[var(--accent)] hover:gap-2.5 transition-all shrink-0"
           >
-            View All <ArrowRight size={14} />
+            {t("view_all")} <ArrowRight size={14} />
           </Link>
         </div>
 

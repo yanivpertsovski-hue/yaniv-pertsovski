@@ -43,7 +43,7 @@ export default async function HomePage({
       <FeaturedProjects locale={locale} />
       <FeaturedCerts locale={locale} />
       <LatestPosts locale={locale} />
-      <SkillsPreview />
+      <SkillsPreview locale={locale} />
     </>
   );
 }

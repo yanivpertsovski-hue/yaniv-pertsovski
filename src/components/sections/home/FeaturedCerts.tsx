@@ -3,8 +3,10 @@ import { ArrowRight } from "lucide-react";
 import { CertificationCard } from "@/components/shared/CertificationCard";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { certifications } from "@/content/data/certifications";
+import { getTranslations } from "next-intl/server";
 
-export function FeaturedCerts({ locale }: { locale: string }) {
+export async function FeaturedCerts({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: "home.sections" });
   const featured = certifications.filter((c) => c.featured).slice(0, 3);
   const lp = (href: string) => (locale === "he" ? `/he${href}` : href);
 
@@ -13,15 +15,15 @@ export function FeaturedCerts({ locale }: { locale: string }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between mb-12">
           <SectionHeader
-            title="Certifications"
-            subtitle="Validated expertise"
+            title={t("certifications")}
+            subtitle={t("certifications_sub")}
             className="mb-0"
           />
           <Link
             href={lp("/certifications")}
             className="hidden sm:flex items-center gap-1.5 text-sm text-[var(--accent)] hover:gap-2.5 transition-all shrink-0"
           >
-            View All <ArrowRight size={14} />
+            {t("view_all")} <ArrowRight size={14} />
           </Link>
         </div>
 

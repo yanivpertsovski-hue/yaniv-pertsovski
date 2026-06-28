@@ -3,8 +3,10 @@ import { ArrowRight } from "lucide-react";
 import { ProjectCard } from "@/components/shared/ProjectCard";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { projects } from "@/content/data/projects";
+import { getTranslations } from "next-intl/server";
 
-export function FeaturedProjects({ locale }: { locale: string }) {
+export async function FeaturedProjects({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: "home.sections" });
   const featured = projects.filter((p) => p.featured).slice(0, 3);
   const lp = (href: string) => (locale === "he" ? `/he${href}` : href);
 
@@ -13,15 +15,15 @@ export function FeaturedProjects({ locale }: { locale: string }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between mb-12">
           <SectionHeader
-            title="Latest Projects"
-            subtitle="What I've been building"
+            title={t("latest_projects")}
+            subtitle={t("latest_projects_sub")}
             className="mb-0"
           />
           <Link
             href={lp("/projects")}
             className="hidden sm:flex items-center gap-1.5 text-sm text-[var(--accent)] hover:gap-2.5 transition-all shrink-0"
           >
-            View All <ArrowRight size={14} />
+            {t("view_all")} <ArrowRight size={14} />
           </Link>
         </div>
 
@@ -36,7 +38,7 @@ export function FeaturedProjects({ locale }: { locale: string }) {
             href={lp("/projects")}
             className="flex items-center gap-1.5 text-sm text-[var(--accent)] hover:gap-2.5 transition-all"
           >
-            View All Projects <ArrowRight size={14} />
+            {t("view_all_projects")} <ArrowRight size={14} />
           </Link>
         </div>
       </div>

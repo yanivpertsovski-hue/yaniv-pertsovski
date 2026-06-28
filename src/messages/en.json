@@ -15,6 +15,13 @@
   "home": {
     "hero": {
       "greeting": "Hello, I'm",
+      "headline": "Senior Cybersecurity & Infrastructure Engineer",
+      "subheadline": "Specializing in enterprise security architecture, penetration testing, and critical infrastructure defense.",
+      "spec_security": "Security Architecture",
+      "spec_pentest": "Penetration Testing",
+      "spec_infra": "Infrastructure",
+      "badge_expert": "Security Expert",
+      "badge_years": "7+ Years",
       "cta_cv": "Download CV",
       "cta_contact": "Get in Touch",
       "cta_github": "GitHub",
@@ -22,20 +29,45 @@
     },
     "sections": {
       "latest_projects": "Latest Projects",
+      "latest_projects_sub": "What I've been building",
       "latest_articles": "Latest Articles",
+      "latest_articles_sub": "Thoughts on security and infrastructure",
       "certifications": "Certifications",
+      "certifications_sub": "Validated expertise",
       "skills": "Technical Skills",
+      "skills_sub": "Core expertise across security, networking, and infrastructure",
       "stats": "By the Numbers",
-      "timeline": "Career Timeline"
+      "timeline": "Career Timeline",
+      "view_all": "View All",
+      "view_all_projects": "View All Projects"
     }
   },
   "about": {
     "title": "About Me",
     "subtitle": "The story behind the engineer",
     "mission": "Mission",
+    "mission_placeholder": "TODO: Write your professional mission statement here. What drives your work? What impact do you want to have in cybersecurity?",
     "values": "Values",
+    "values_subtitle": "What guides my work",
     "focus": "Current Focus",
-    "philosophy": "Professional Philosophy"
+    "philosophy": "Professional Philosophy",
+    "philosophy_placeholder": "\"TODO: Add your professional philosophy or a quote that defines your approach to security and engineering.\"",
+    "biography": "Professional Biography",
+    "focus_items": [
+      "TODO: Current focus area 1 (e.g. Red Team operations)",
+      "TODO: Current focus area 2 (e.g. Cloud security architecture)",
+      "TODO: Current certification pursuit"
+    ],
+    "values_list": {
+      "precision": "Precision",
+      "precision_desc": "Security is about details. One misconfiguration can be catastrophic. I approach every system with exactness and thoroughness.",
+      "learning": "Continuous Learning",
+      "learning_desc": "The threat landscape evolves daily. I invest heavily in staying current with new attack techniques, defenses, and technologies.",
+      "ownership": "Ownership",
+      "ownership_desc": "I treat the systems I protect as my own. That mindset drives decisions that prioritize long-term security over shortcuts.",
+      "transparency": "Transparency",
+      "transparency_desc": "Security findings, risks, and recommendations should be communicated clearly to all stakeholders — technical and non-technical."
+    }
   },
   "experience": {
     "title": "Experience",
@@ -93,14 +125,31 @@
     }
   },
   "skills": {
-    "title": "Skills",
-    "subtitle": "Technologies and tools I work with",
+    "title": "Technical Skills",
+    "subtitle": "Technologies and tools I use to design, build, and secure systems.",
+    "all": "All",
     "levels": {
       "beginner": "Beginner",
       "intermediate": "Intermediate",
       "advanced": "Advanced",
       "expert": "Expert"
+    },
+    "categories": {
+      "cybersecurity": "Cybersecurity",
+      "networking": "Networking",
+      "fortinet": "Fortinet",
+      "microsoft": "Microsoft",
+      "cloud": "Cloud",
+      "linux": "Linux",
+      "scripting": "Scripting & Dev",
+      "other": "Other"
     }
+  },
+  "stats": {
+    "years": "Years of Experience",
+    "certifications": "Certifications",
+    "projects": "Projects Delivered",
+    "assessments": "Security Assessments"
   },
   "homelab": {
     "title": "Home Lab",

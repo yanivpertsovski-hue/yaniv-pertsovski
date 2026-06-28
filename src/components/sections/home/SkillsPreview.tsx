@@ -4,25 +4,18 @@ import { motion } from "framer-motion";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { skillGroups } from "@/content/data/skills";
 import { SkillBar } from "@/components/shared/SkillBar";
+import { useTranslations } from "next-intl";
 
-// Top skills across all categories for the preview
-const TOP_SKILLS = [
-  "cybersecurity",
-  "networking",
-  "microsoft",
-  "fortinet",
-].flatMap((cat) => {
-  const group = skillGroups.find((g) => g.category === cat);
-  return group ? group.skills.slice(0, 2) : [];
-});
+export function SkillsPreview({ locale }: { locale: string }) {
+  const t = useTranslations("home.sections");
+  const tc = useTranslations("skills.categories");
 
-export function SkillsPreview() {
   return (
     <section className="py-24 bg-[var(--surface)]" aria-labelledby="skills-preview-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title="Technical Skills"
-          subtitle="Core expertise across security, networking, and infrastructure"
+          title={t("skills")}
+          subtitle={t("skills_sub")}
         />
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -36,7 +29,7 @@ export function SkillsPreview() {
               className="glass rounded-2xl p-5 flex flex-col gap-4"
             >
               <h3 className="font-semibold text-sm text-[var(--accent)]">
-                {group.label}
+                {tc(group.category as Parameters<typeof tc>[0])}
               </h3>
               <div className="flex flex-col gap-3">
                 {group.skills.slice(0, 4).map((skill, si) => (

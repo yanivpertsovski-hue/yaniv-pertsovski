@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import { AnimatedCounter } from "@/components/shared/AnimatedCounter";
 import { stats } from "@/content/data/stats";
+import { useTranslations } from "next-intl";
 
 export function StatsSection() {
+  const t = useTranslations("stats");
+
   return (
     <section
       className="relative py-20 border-y border-[var(--border)]"
@@ -14,7 +17,7 @@ export function StatsSection() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, i) => (
             <motion.div
-              key={stat.label}
+              key={stat.labelKey}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -24,11 +27,12 @@ export function StatsSection() {
               <div className="text-4xl sm:text-5xl font-bold tracking-tight gradient-text">
                 <AnimatedCounter
                   value={stat.value}
-                  prefix={stat.prefix}
                   suffix={stat.suffix}
                 />
               </div>
-              <p className="mt-2 text-sm text-[var(--muted)]">{stat.label}</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">
+                {t(stat.labelKey as "years" | "certifications" | "projects" | "assessments")}
+              </p>
             </motion.div>
           ))}
         </div>
