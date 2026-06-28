@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Home Lab | Yaniv Pertsovski",
-    description: "Personal cybersecurity research lab — servers, firewalls, VMware, and security tooling",
+    title: "מעבדה ביתית | יניב פרצובסקי",
+    description: "מעבדת מחקר אבטחה אישית — שרתים, חומות אש, VMware וכלי אבטחה",
   };
 }
 

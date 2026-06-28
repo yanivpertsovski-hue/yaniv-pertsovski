@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ExternalLink, ArrowRight } from "lucide-react";
+import { ExternalLink, ArrowLeft } from "lucide-react";
 import { GithubIcon } from "./GithubIcon";
 import { TechBadge } from "./TechBadge";
 import { cn } from "@/lib/utils";
@@ -20,6 +20,14 @@ const STATUS_COLORS: Record<string, string> = {
   "in-progress": "text-[var(--warning)] bg-[var(--warning)]/10",
   archived: "text-[var(--muted)] bg-[var(--surface-2)]",
   planned: "text-[var(--accent)] bg-[var(--accent-muted)]",
+};
+
+const STATUS_HE: Record<string, string> = {
+  active: "פעיל",
+  completed: "הושלם",
+  "in-progress": "בתהליך",
+  archived: "ארכיון",
+  planned: "מתוכנן",
 };
 
 export function ProjectCard({ project, locale: _locale, index = 0 }: ProjectCardProps) {
@@ -43,7 +51,7 @@ export function ProjectCard({ project, locale: _locale, index = 0 }: ProjectCard
             )}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-current" />
-            {project.status}
+            {STATUS_HE[project.status] ?? project.status}
           </span>
           <h3 className="font-semibold text-lg leading-tight group-hover:text-[var(--accent)] transition-colors">
             {project.title}
@@ -99,7 +107,7 @@ export function ProjectCard({ project, locale: _locale, index = 0 }: ProjectCard
           href={href}
           className="inline-flex items-center gap-1.5 text-sm text-[var(--accent)] font-medium hover:gap-2.5 transition-all"
         >
-          View Project <ArrowRight size={14} />
+          <ArrowLeft size={14} /> צפה בפרויקט
         </Link>
       </div>
     </motion.article>

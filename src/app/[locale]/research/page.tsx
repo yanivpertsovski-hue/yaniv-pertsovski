@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Research | Yaniv Pertsovski",
-    description: "Security research, write-ups, vulnerability analysis, and lab experiments",
+    title: "מחקר | יניב פרצובסקי",
+    description: "מחקר אבטחה, write-ups, ניתוח פגיעויות וניסויי מעבדה",
   };
 }
 

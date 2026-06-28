@@ -2,14 +2,10 @@ import { BlogCard } from "@/components/shared/BlogCard";
 import { getAllPosts } from "@/lib/mdx";
 import type { Metadata } from "next";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Blog | Yaniv Pertsovski",
-    description: "Technical articles on cybersecurity, infrastructure, and engineering",
+    title: "בלוג | יניב פרצובסקי",
+    description: "מאמרים טכניים על אבטחת סייבר, תשתיות והנדסה",
   };
 }
 
@@ -22,28 +18,22 @@ export default async function BlogPage({
   const posts = getAllPosts();
 
   return (
-    <div className="min-h-dvh py-24">
+    <div className="min-h-dvh py-24" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
-          <p className="text-[var(--accent)] font-mono text-sm mb-4">
+          <p className="text-[var(--accent)] font-mono text-sm mb-4" dir="ltr">
             $ cat /var/log/thoughts.log
           </p>
-          <h1 className="text-5xl font-bold tracking-tight mb-4">
-            <span className="gradient-text">Blog</span>
-          </h1>
-          <p className="text-[var(--muted)] text-lg">
-            Technical articles on security, infrastructure, and engineering.
-          </p>
+          <h1 className="text-5xl font-bold tracking-tight mb-4 gradient-text">בלוג</h1>
+          <p className="text-[var(--muted)] text-lg">מאמרים טכניים על אבטחה, תשתיות והנדסה.</p>
         </div>
 
         {posts.length === 0 ? (
           <div className="text-center py-24 text-[var(--muted)]">
-            <p className="text-lg">No posts yet.</p>
+            <p className="text-lg">אין פוסטים עדיין.</p>
             <p className="text-sm mt-2">
-              Add MDX files to{" "}
-              <code className="bg-[var(--surface-2)] px-1 py-0.5 rounded text-xs">
-                src/content/blog/
-              </code>
+              הוסף קבצי MDX לתיקייה{" "}
+              <code className="bg-[var(--surface-2)] px-1 py-0.5 rounded text-xs">src/content/blog/</code>
             </p>
           </div>
         ) : (

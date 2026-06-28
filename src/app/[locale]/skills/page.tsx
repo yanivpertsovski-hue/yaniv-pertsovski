@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Skills | Yaniv Pertsovski",
-    description: "Technical skills in cybersecurity, networking, infrastructure, cloud, and programming",
+    title: "כישורים | יניב פרצובסקי",
+    description: "כישורים טכניים באבטחת סייבר, רשתות, תשתיות, ענן ותכנות",
   };
 }
 
