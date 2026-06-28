@@ -17,7 +17,7 @@ export function HeroSection({ locale }: { locale: string }) {
       className="relative min-h-[100dvh] flex items-center overflow-hidden"
       aria-label="Introduction"
     >
-      {/* Background effects */}
+      {/* Background */}
       <div className="hero-glow" aria-hidden />
       <div
         className="absolute inset-0 pointer-events-none"
@@ -27,8 +27,7 @@ export function HeroSection({ locale }: { locale: string }) {
         }}
         aria-hidden
       />
-
-      {/* Grid pattern */}
+      {/* Grid */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.015]"
         style={{
@@ -40,20 +39,18 @@ export function HeroSection({ locale }: { locale: string }) {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-24">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Text content */}
+        {/* Always LTR layout — photo right, text left */}
+        <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-16 items-center" dir="ltr">
+
+          {/* ── Text ── */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="flex flex-col gap-6"
+            className="flex flex-col gap-6 flex-1 text-left"
           >
             {/* Available badge */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
+            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--success)]/10 border border-[var(--success)]/20 text-[var(--success)] text-xs font-medium">
                 <span className="w-2 h-2 rounded-full bg-[var(--success)] animate-pulse" />
                 {t("available")}
@@ -62,32 +59,28 @@ export function HeroSection({ locale }: { locale: string }) {
 
             {/* Name */}
             <div>
-              <p className="text-[var(--muted)] text-sm uppercase tracking-widest mb-2 font-mono">
+              <p className="text-[var(--muted)] text-xs uppercase tracking-widest mb-3 font-mono">
                 {t("greeting")}
               </p>
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-none">
-                <span className="block">{profile.name.split(" ")[0]}</span>
-                <span className="block gradient-text">
-                  {profile.name.split(" ").slice(1).join(" ")}
-                </span>
+                <span className="block text-[var(--foreground)]">{profile.name.split(" ")[0]}</span>
+                <span className="block gradient-text">{profile.name.split(" ").slice(1).join(" ")}</span>
               </h1>
             </div>
 
             {/* Headline */}
             <div className="flex items-center gap-3">
-              <div className="w-8 h-px bg-[var(--accent)]" />
-              <h2 className="text-xl sm:text-2xl text-[var(--muted)] font-light">
-                {profile.headline}
-              </h2>
+              <div className="w-8 h-px bg-[var(--accent)] shrink-0" />
+              <h2 className="text-lg sm:text-xl text-[var(--muted)] font-light">{profile.headline}</h2>
             </div>
 
             {/* Description */}
-            <p className="text-[var(--muted)] text-base leading-relaxed max-w-xl">
+            <p className="text-[var(--muted)] text-sm sm:text-base leading-relaxed max-w-xl">
               {profile.subheadline}
             </p>
 
             {/* Specializations */}
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2">
               {[
                 { icon: Shield, label: "Security Architecture" },
                 { icon: Terminal, label: "Penetration Testing" },
@@ -95,16 +88,16 @@ export function HeroSection({ locale }: { locale: string }) {
               ].map(({ icon: Icon, label }) => (
                 <div
                   key={label}
-                  className="flex items-center gap-2 text-sm text-[var(--muted)] bg-[var(--surface-2)] border border-[var(--border)] px-3 py-1.5 rounded-lg"
+                  className="flex items-center gap-1.5 text-xs text-[var(--muted)] bg-[var(--surface-2)] border border-[var(--border)] px-3 py-1.5 rounded-lg"
                 >
-                  <Icon size={13} className="text-[var(--accent)]" />
+                  <Icon size={12} className="text-[var(--accent)]" />
                   {label}
                 </div>
               ))}
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-3 pt-2">
+            <div className="flex flex-wrap gap-3 pt-1">
               <a
                 href={profile.cvUrl}
                 target="_blank"
@@ -114,7 +107,6 @@ export function HeroSection({ locale }: { locale: string }) {
                 <Download size={15} />
                 {t("cta_cv")}
               </a>
-
               <Link
                 href={lp("/contact")}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl glass border border-[var(--border)] font-medium text-sm transition-all hover:-translate-y-0.5 hover:border-[var(--accent)]/40"
@@ -122,7 +114,6 @@ export function HeroSection({ locale }: { locale: string }) {
                 <Mail size={15} />
                 {t("cta_contact")}
               </Link>
-
               {profile.social.github && (
                 <a
                   href={profile.social.github}
@@ -134,7 +125,6 @@ export function HeroSection({ locale }: { locale: string }) {
                   <GithubIcon size={18} />
                 </a>
               )}
-
               {profile.social.linkedin && (
                 <a
                   href={profile.social.linkedin}
@@ -149,43 +139,40 @@ export function HeroSection({ locale }: { locale: string }) {
             </div>
           </motion.div>
 
-          {/* Photo */}
+          {/* ── Photo ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-            className="flex justify-center lg:justify-end"
+            className="flex justify-center shrink-0"
           >
-            <div className="relative">
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80">
               {/* Glow ring */}
               <div className="absolute -inset-4 rounded-full bg-gradient-to-tr from-[var(--accent)]/20 to-purple-500/10 blur-2xl" />
 
-              {/* Photo container */}
-              <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-2 border-[var(--border)] shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--surface-2)] to-[var(--surface)] flex items-center justify-center">
-                  {/* TODO: Replace with real photo */}
-                  <div className="flex flex-col items-center gap-3 text-[var(--muted)]">
-                    <div className="w-20 h-20 rounded-full bg-[var(--surface-2)] border border-[var(--border)] flex items-center justify-center">
-                      <span className="text-3xl font-bold gradient-text">YP</span>
-                    </div>
-                    <p className="text-xs font-mono opacity-60">TODO: Add Photo</p>
-                  </div>
+              {/* Photo */}
+              <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-[var(--border)] shadow-2xl bg-[var(--surface-2)] flex items-center justify-center">
+                <div className="flex flex-col items-center gap-2 text-[var(--muted)]">
+                  <span className="text-4xl font-bold gradient-text">YP</span>
+                  <p className="text-xs font-mono opacity-40">TODO: Add Photo</p>
                 </div>
               </div>
 
-              {/* Floating badges */}
+              {/* Badge — bottom left */}
               <motion.div
-                animate={{ y: [0, -8, 0] }}
+                animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-                className="absolute -bottom-4 -left-8 glass rounded-xl px-3 py-2 border border-[var(--border)] text-xs font-medium shadow-lg"
+                className="absolute -bottom-2 -left-6 glass rounded-xl px-3 py-2 border border-[var(--border)] text-xs font-medium shadow-lg whitespace-nowrap"
               >
                 <span className="text-[var(--accent)]">★</span> Security Expert
               </motion.div>
 
+              {/* Badge — top right */}
               <motion.div
-                animate={{ y: [0, 8, 0] }}
+                animate={{ y: [0, 6, 0] }}
                 transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut", delay: 0.5 }}
-                className="absolute -top-4 -right-4 glass rounded-xl px-3 py-2 border border-[var(--border)] text-xs font-medium shadow-lg"
+                className="absolute -top-2 -right-6 glass rounded-xl px-3 py-2 border border-[var(--border)] text-xs font-medium shadow-lg whitespace-nowrap"
+                dir="ltr"
               >
                 <span className="font-mono text-[var(--success)]">$</span> 7+ Years
               </motion.div>

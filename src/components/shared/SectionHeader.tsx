@@ -28,11 +28,11 @@ export function SectionHeader({
         className
       )}
     >
-      <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+      <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" dir="ltr">
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-3 text-[var(--muted)] text-lg max-w-2xl">
+        <p className="mt-3 text-[var(--muted)] text-lg max-w-2xl" dir="ltr">
           {subtitle}
         </p>
       )}

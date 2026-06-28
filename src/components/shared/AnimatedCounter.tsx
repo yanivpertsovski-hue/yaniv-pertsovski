@@ -37,7 +37,7 @@ export function AnimatedCounter({
   }, [isInView, value, duration]);
 
   return (
-    <span ref={ref}>
+    <span ref={ref} dir="ltr" style={{ unicodeBidi: "isolate" }}>
       {prefix}
       {count}
       {suffix}

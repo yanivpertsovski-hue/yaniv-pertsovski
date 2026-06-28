@@ -41,9 +41,7 @@ export const metadata: Metadata = {
     alternateLocale: "he_IL",
     siteName: "Yaniv Pertsovski",
   },
-  twitter: {
-    card: "summary_large_image",
-  },
+  twitter: { card: "summary_large_image" },
   robots: {
     index: true,
     follow: true,
@@ -51,19 +49,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      dir="ltr"
-      suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} dark`}
-    >
-      <body className="min-h-dvh flex flex-col">{children}</body>
+    <html lang="en" dir="ltr" suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable}`}>
+      <head>
+        {/* Apply dark mode before first paint to prevent flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme')||'dark';if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');}catch(e){document.documentElement.classList.add('dark');}})();`,
+          }}
+        />
+      </head>
+      <body className="min-h-dvh flex flex-col bg-[var(--background)] text-[var(--foreground)]">
+        {children}
+      </body>
     </html>
   );
 }
